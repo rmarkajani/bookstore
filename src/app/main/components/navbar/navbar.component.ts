@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Host, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
+  profileDropdown: boolean = false;
   routes = [
     {
       title: 'Home',
@@ -24,4 +25,13 @@ export class NavbarComponent {
       path: 'contact-us',
     },
   ];
+
+  @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(
+    event: KeyboardEvent
+  ) {
+    console.log(event);
+    if (event.code === 'Escape') {
+      this.profileDropdown = false;
+    }
+  }
 }
