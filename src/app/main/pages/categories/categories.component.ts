@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./categories.component.scss'],
 })
 export class CategoriesComponent {
-  jsonData: any[] = [];
+  booklist: any[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -32,9 +32,9 @@ export class CategoriesComponent {
           ) {
             obj[headers[headerIndex].toLocaleLowerCase()] = row[headerIndex];
           }
-          this.jsonData.push(obj);
+          this.booklist.push(obj);
         }
-        console.log(this.jsonData);
+        console.log(this.booklist[0]);
       },
       (error) => {
         console.log(error);

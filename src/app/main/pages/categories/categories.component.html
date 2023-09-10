@@ -1,1 +1,9 @@
 <p>categories works!</p>
+
+<div *ngFor="let book of booklist | slice : 0 : 5">
+  {{ book.author }}
+  {{ book.description }}
+  {{ book.genre }}
+  {{ book.price }}
+  {{ book.title }}
+</div>
