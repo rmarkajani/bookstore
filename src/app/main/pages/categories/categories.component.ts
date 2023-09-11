@@ -28,9 +28,13 @@ export class CategoriesComponent {
 
   filterByCategory(category: string) {
     this.showCategories = false;
-    this.originalList = this.booklist.filter(
-      (book: Book) => book.genre === category
-    );
+    if (category === 'All Categories') {
+      this.originalList = this.booklist;
+    } else {
+      this.originalList = this.booklist.filter(
+        (book: Book) => book.genre === category
+      );
+    }
   }
 
   loadCSV(): void {
@@ -56,9 +60,10 @@ export class CategoriesComponent {
         }
 
         this.originalList = this.booklist;
-        this.categories = Array.from(
-          new Set(this.booklist.map((book) => book.genre))
-        );
+        this.categories = [
+          'All Categories',
+          ...Array.from(new Set(this.booklist.map((book) => book.genre))),
+        ];
       },
       (error) => {
         console.log(error);
