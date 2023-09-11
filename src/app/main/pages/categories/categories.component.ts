@@ -19,6 +19,7 @@ export class CategoriesComponent {
   booklist: Book[] = [];
   originalList: Book[] = [];
   categories: string[] = [];
+  selectedCategory: string = 'All Categories';
 
   constructor(private http: HttpClient) {}
 
@@ -28,6 +29,7 @@ export class CategoriesComponent {
 
   filterByCategory(category: string) {
     this.showCategories = false;
+    this.selectedCategory = category;
     if (category === 'All Categories') {
       this.originalList = this.booklist;
     } else {
