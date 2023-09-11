@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
@@ -15,13 +15,22 @@ interface Book {
   styleUrls: ['./categories.component.scss'],
 })
 export class CategoriesComponent {
+  showCategories: boolean = false;
   booklist: Book[] = [];
+  originalList: Book[] = [];
   categories: string[] = [];
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.loadCSV();
+  }
+
+  filterByCategory(category: string) {
+    this.showCategories = false;
+    this.originalList = this.booklist.filter(
+      (book: Book) => book.genre === category
+    );
   }
 
   loadCSV(): void {
@@ -46,10 +55,10 @@ export class CategoriesComponent {
           this.booklist.push(obj);
         }
 
+        this.originalList = this.booklist;
         this.categories = Array.from(
           new Set(this.booklist.map((book) => book.genre))
         );
-        console.log(this.booklist);
       },
       (error) => {
         console.log(error);
@@ -82,5 +91,12 @@ export class CategoriesComponent {
     }
     ret.push(value);
     return ret;
+  }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  onKeydownHandler(event: KeyboardEvent) {
+    if (event.code === 'Escape') {
+      this.showCategories = false;
+    }
   }
 }

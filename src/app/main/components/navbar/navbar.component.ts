@@ -26,9 +26,8 @@ export class NavbarComponent {
     },
   ];
 
-  @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(
-    event: KeyboardEvent
-  ) {
+  @HostListener('document:keydown.escape', ['$event'])
+  onKeydownHandler(event: KeyboardEvent) {
     console.log(event);
     if (event.code === 'Escape') {
       this.profileDropdown = false;
