@@ -10,16 +10,16 @@ interface Book {
   price: string;
 }
 @Component({
-  selector: 'app-categories',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.scss'],
+  selector: 'app-books',
+  templateUrl: './books.component.html',
+  styleUrls: ['./books.component.scss'],
 })
-export class CategoriesComponent {
-  showCategories: boolean = false;
+export class BooksComponent {
+  showBooks: boolean = false;
   booklist: Book[] = [];
   originalList: Book[] = [];
-  categories: string[] = [];
-  selectedCategory: string = 'All Categories';
+  books: string[] = [];
+  selectedCategory: string = 'All Books';
 
   constructor(private http: HttpClient) {}
 
@@ -28,9 +28,9 @@ export class CategoriesComponent {
   }
 
   filterByCategory(category: string) {
-    this.showCategories = false;
+    this.showBooks = false;
     this.selectedCategory = category;
-    if (category === 'All Categories') {
+    if (category === 'All Books') {
       this.originalList = this.booklist;
     } else {
       this.originalList = this.booklist.filter(
@@ -62,8 +62,8 @@ export class CategoriesComponent {
         }
 
         this.originalList = this.booklist;
-        this.categories = [
-          'All Categories',
+        this.books = [
+          'All Books',
           ...Array.from(new Set(this.booklist.map((book) => book.genre))),
         ];
       },
@@ -103,7 +103,7 @@ export class CategoriesComponent {
   @HostListener('document:keydown.escape', ['$event'])
   onKeydownHandler(event: KeyboardEvent) {
     if (event.code === 'Escape') {
-      this.showCategories = false;
+      this.showBooks = false;
     }
   }
 }

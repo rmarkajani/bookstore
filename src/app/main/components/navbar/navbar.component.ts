@@ -13,8 +13,8 @@ export class NavbarComponent {
       path: 'home',
     },
     {
-      title: 'Categories',
-      path: 'categories',
+      title: 'Books',
+      path: 'books',
     },
     {
       title: 'About Us',
