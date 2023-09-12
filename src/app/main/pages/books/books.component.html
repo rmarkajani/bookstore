@@ -2,10 +2,10 @@
   <div class="sm:flex sm:items-center">
     <div class="sm:flex-auto">
       <h1 class="text-base font-semibold leading-6 text-gray-900">
-        Categories
+        Books
       </h1>
       <p class="mt-2 text-sm text-gray-700">
-        A list of all the books and their categories you can buy.
+        A list of all the books and their books you can buy.
       </p>
     </div>
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
@@ -22,7 +22,7 @@
             aria-expanded="false"
             value="{{ selectedCategory }}"
             readonly
-            (click)="showCategories = !showCategories"
+            (click)="showBooks = !showBooks"
           />
           <button
             type="button"
@@ -45,7 +45,7 @@
           </button>
 
           <ul
-            *ngIf="showCategories"
+            *ngIf="showBooks"
             class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
             id="options"
             role="listbox"
@@ -56,7 +56,7 @@
               Active: "text-white bg-indigo-600", Not Active: "text-gray-900"
             -->
             <li
-              *ngFor="let category of categories"
+              *ngFor="let category of books"
               class="relative cursor-pointer select-none py-2 pl-3 pr-9 text-gray-900 hover:bg-slate-100"
               id="option-0"
               role="option"
