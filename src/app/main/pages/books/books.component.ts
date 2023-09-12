@@ -8,6 +8,7 @@ interface Book {
   description: string;
   genre: string;
   price: string;
+  quantity: string;
 }
 @Component({
   selector: 'app-books',
@@ -43,7 +44,7 @@ export class BooksComponent {
     this.http.get('assets/booklist.csv', { responseType: 'text' }).subscribe(
       (data) => {
         let lines = data.split('\n');
-        let headers = lines[0].split(',');
+        let headers = lines[0].replace(/\r/g, '').split(',');        
 
         for (let i = 1; i < lines.length; i++) {
           // Skip empty or null lines
