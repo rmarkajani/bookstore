@@ -21,6 +21,11 @@ export class CartState {
   static getCartQuantity(state: CartStateModel) {
     return state.cart.length;
   }
+  
+  @Selector()
+  static getCart(state: CartStateModel) {
+    return state.cart;
+  }
 
   @Action(AddToCart)
   add(

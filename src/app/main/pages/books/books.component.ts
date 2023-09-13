@@ -57,7 +57,12 @@ export class BooksComponent {
           let currentline = this.csvLineToArray(lines[i]);
 
           for (let j = 0; j < headers.length; j++) {
-            obj[headers[j].toLocaleLowerCase()] = currentline[j];
+            const key = headers[j].toLocaleLowerCase();
+            if (key === 'quantity') {
+              obj[key] = +currentline[j].replace(/\r/g, '');
+            } else {
+              obj[key] = currentline[j];
+            }
           }
 
           this.booklist.push(obj);
