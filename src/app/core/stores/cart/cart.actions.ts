@@ -1,4 +1,6 @@
-export class CartAction {
-  static readonly type = '[Cart] Add item';
-  constructor(public payload: string) { }
+import { Book } from '../../interfaces/book.interface';
+
+export class AddToCart {
+  static readonly type = '[Cart] Add To Cart';
+  constructor(public payload: Book) {}
 }

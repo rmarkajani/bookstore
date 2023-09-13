@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext } from '@ngxs/store';
-import { CartAction } from './cart.actions';
+import { AddToCart } from './cart.actions';
+import { Book } from '../../interfaces/book.interface';
 
 export class CartStateModel {
-  public items: string[] = [];
+  public items: Book[] = [];
 }
 
 const defaults = {
@@ -16,10 +17,10 @@ const defaults = {
 })
 @Injectable()
 export class CartState {
-  @Action(CartAction)
+  @Action(AddToCart)
   add(
     { getState, setState }: StateContext<CartStateModel>,
-    { payload }: CartAction
+    { payload }: AddToCart
   ) {
     const state = getState();
     setState({ items: [...state.items, payload] });

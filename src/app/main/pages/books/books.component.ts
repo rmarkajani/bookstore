@@ -1,15 +1,10 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { Store } from '@ngxs/store';
+import { AddToCart } from 'src/app/core/stores/cart/cart.actions';
+import { Book } from 'src/app/core/interfaces/book.interface';
 
-interface Book {
-  author: string;
-  title: string;
-  description: string;
-  genre: string;
-  price: string;
-  quantity: string;
-}
 @Component({
   selector: 'app-books',
   templateUrl: './books.component.html',
@@ -22,10 +17,16 @@ export class BooksComponent {
   books: string[] = [];
   selectedCategory: string = 'All Books';
 
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
+  private store = inject(Store);
+  constructor() {}
 
   ngOnInit(): void {
     this.loadCSV();
+  }
+
+  addToCart(book: Book) {
+    this.store.dispatch(new AddToCart(book));
   }
 
   filterByCategory(category: string) {
@@ -44,7 +45,7 @@ export class BooksComponent {
     this.http.get('assets/booklist.csv', { responseType: 'text' }).subscribe(
       (data) => {
         let lines = data.split('\n');
-        let headers = lines[0].replace(/\r/g, '').split(',');        
+        let headers = lines[0].replace(/\r/g, '').split(',');
 
         for (let i = 1; i < lines.length; i++) {
           // Skip empty or null lines
