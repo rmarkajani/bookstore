@@ -4,11 +4,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ComponentsModule } from './main/components/components.module';
-import { CartModule } from './main/pages/cart/cart.module';
+import { NgxsModule } from '@ngxs/store';
+import { environment } from 'src/environments/environment';
+import { stores } from './core/stores';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, ComponentsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ComponentsModule,
+    NgxsModule.forRoot(stores, {
+      developmentMode: !environment.production,
+    }),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

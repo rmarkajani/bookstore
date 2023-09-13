@@ -1,9 +1,7 @@
 <div class="px-4 sm:px-6 lg:px-8">
   <div class="sm:flex sm:items-center">
     <div class="sm:flex-auto">
-      <h1 class="text-base font-semibold leading-6 text-gray-900">
-        Books
-      </h1>
+      <h1 class="text-base font-semibold leading-6 text-gray-900">Books</h1>
       <p class="mt-2 text-sm text-gray-700">
         A list of all the books and their books you can buy.
       </p>
@@ -175,7 +173,10 @@
               <!-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 {{ book.quantity }}
               </td> -->
-              <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+              <td
+                class="whitespace-nowrap px-3 py-4 text-sm text-indigo-600 hover:text-indigo-900 cursor-pointer"
+                (click)="addToCart(book)"
+              >
                 {{ book.price }}
               </td>
               <!-- <td
@@ -194,3 +195,16 @@
     </div>
   </div>
 </div>
+
+
+
+<!-- <app-books-modal *ngIf="false"></app-books-modal> -->
+
+<!-- ng g c main/pages/books/books-modal -->
+
+
+
+
+
+
+
