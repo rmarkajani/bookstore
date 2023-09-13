@@ -1,4 +1,7 @@
 import { Component, Host, HostListener } from '@angular/core';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { CartState } from 'src/app/core/stores/cart/cart.state';
 
 @Component({
   selector: 'app-navbar',
@@ -6,6 +9,8 @@ import { Component, Host, HostListener } from '@angular/core';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
+  @Select(CartState.getCartQuantity) itemQty$!: Observable<number>
+
   profileDropdown: boolean = false;
   routes = [
     {
@@ -25,6 +30,8 @@ export class NavbarComponent {
       path: 'contact-us',
     },
   ];
+
+  ngOnInit() {}
 
   @HostListener('document:keydown.escape', ['$event'])
   onKeydownHandler(event: KeyboardEvent) {
