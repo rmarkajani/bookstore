@@ -155,7 +155,7 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
-            <tr *ngFor="let book of originalList" (click)="addToCart(book)">
+            <tr *ngFor="let book of originalList">
               <td
                 class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
               >
@@ -173,7 +173,10 @@
               <!-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 {{ book.quantity }}
               </td> -->
-              <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+              <td
+                class="whitespace-nowrap px-3 py-4 text-sm text-indigo-600 hover:text-indigo-900 cursor-pointer"
+                (click)="addToCart(book)"
+              >
                 {{ book.price }}
               </td>
               <!-- <td
@@ -192,3 +195,16 @@
     </div>
   </div>
 </div>
+
+
+
+<!-- <app-books-modal *ngIf="false"></app-books-modal> -->
+
+<!-- ng g c main/pages/books/books-modal -->
+
+
+
+
+
+
+

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { AddToCart } from './cart.actions';
+import { AddToCart, RemoveFromCart } from './cart.actions';
 import { Book } from '../../interfaces/book.interface';
 
 export class CartStateModel {
@@ -29,5 +29,18 @@ export class CartState {
   ) {
     const state = getState();
     setState({ cart: [...state.cart, payload] });
+
+    // http put update db
+  }
+
+  @Action(RemoveFromCart)
+  removeFromCart(
+    { getState, setState }: StateContext<CartStateModel>,
+    { payload }: RemoveFromCart
+  ) {
+    const state = getState();
+    setState({ cart: [...state.cart, payload] });
+
+    // http put update db
   }
 }
