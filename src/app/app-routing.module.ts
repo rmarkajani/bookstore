@@ -10,9 +10,7 @@ const routes: Routes = [
   {
     path: 'books',
     loadChildren: () =>
-      import('./main/pages/books/books.module').then(
-        (m) => m.BooksModule
-      ),
+      import('./main/pages/books/books.module').then((m) => m.BooksModule),
   },
   {
     path: 'about-us',
@@ -27,6 +25,11 @@ const routes: Routes = [
       import('./main/pages/contact-us/contact-us.module').then(
         (m) => m.ContactUsModule
       ),
+  },
+  {
+    path: 'cart',
+    loadChildren: () =>
+      import('./main/pages/cart/cart.module').then((m) => m.CartModule),
   },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' },
