@@ -7,6 +7,7 @@ import { ComponentsModule } from './main/components/components.module';
 import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
 import { stores } from './core/stores';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { stores } from './core/stores';
     NgxsModule.forRoot(stores, {
       developmentMode: !environment.production,
     }),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
