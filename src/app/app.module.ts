@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ComponentsModule } from './main/components/components.module';
 import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
+import { stores } from './core/stores';
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,7 +14,7 @@ import { environment } from 'src/environments/environment';
     BrowserModule,
     AppRoutingModule,
     ComponentsModule,
-    NgxsModule.forRoot([], {
+    NgxsModule.forRoot(stores, {
       developmentMode: !environment.production,
     }),
   ],
