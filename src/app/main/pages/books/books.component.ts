@@ -68,6 +68,7 @@ export class BooksComponent {
           this.booklist.push(obj);
         }
 
+
         this.originalList = this.booklist;
         this.books = [
           'All Books',
@@ -79,6 +80,7 @@ export class BooksComponent {
       }
     );
   }
+
 
   csvLineToArray(text: string): string[] {
     let ret: string[] = [];
