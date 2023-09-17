@@ -4,5 +4,5 @@ export interface Book {
   description: string;
   genre: string;
   price: number;
-  quantity: string;
+  quantity: number;
 }

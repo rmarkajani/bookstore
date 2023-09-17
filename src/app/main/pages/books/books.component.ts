@@ -58,8 +58,8 @@ export class BooksComponent {
 
           for (let j = 0; j < headers.length; j++) {
             const key = headers[j].toLocaleLowerCase();
-            if (key === 'quantity') {
-              obj[key] = +currentline[j].replace(/\r/g, '');
+            if (key === 'quantity' || key === 'price') {
+              obj[key] = +currentline[j].replace(/\r/g, '').replace('$', '');
             } else {
               obj[key] = currentline[j];
             }

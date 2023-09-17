@@ -5,10 +5,12 @@ import { Book } from '../../interfaces/book.interface';
 
 export class CartStateModel {
   public cart: Book[] = [];
+  public subTotal: number;
 }
 
 const defaults = {
   cart: [],
+  subTotal: 0
 };
 
 @State<CartStateModel>({
@@ -25,7 +27,8 @@ export class CartState {
   @Selector()
   static getSubtotal(state: CartStateModel): number {
     // Calculate the subtotal by summing up the prices of items in the cart
-    return state.cart.reduce((acc, book) => acc + book.price, 0);
+    const subTotal = state.cart.reduce((acc, book) => acc + book.price, 0);
+    return subTotal;
   }
 
   @Selector()
@@ -39,7 +42,7 @@ export class CartState {
     { payload }: AddToCart
   ) {
     const state = getState();
-    setState({ cart: [...state.cart, payload] });
+    setState({ cart: [...state.cart, payload], subTotal: state.subTotal + payload.price });
 
     // http put update db
   }
@@ -50,7 +53,7 @@ export class CartState {
     { payload }: RemoveFromCart
   ) {
     const state = getState();
-    setState({ cart: [...state.cart, payload] });
+    // setState({ cart: [...state.cart, payload] });
 
     // http put update db
   }
