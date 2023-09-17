@@ -31,6 +31,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./main/pages/cart/cart.module').then((m) => m.CartModule),
   },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./main/pages/login/login.module').then((m) => m.LoginModule),
+  },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' },
 ];
