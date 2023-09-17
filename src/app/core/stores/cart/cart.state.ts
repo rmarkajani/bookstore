@@ -25,10 +25,12 @@ export class CartState {
   }  
 
   @Selector()
-  static getSubtotal(state: CartStateModel): number {
+  static getSummary(state: CartStateModel): { subTotal: number; subTax: number; total: number; } {
     // Calculate the subtotal by summing up the prices of items in the cart
     const subTotal = state.cart.reduce((acc, book) => acc + book.price, 0);
-    return subTotal;
+    const subTax = +(subTotal * 0.08).toFixed(2)
+    const total = subTax + subTotal
+    return {subTotal: subTotal, subTax: subTax, total: total};
   }
 
   @Selector()
