@@ -20,10 +20,16 @@ export class CartState {
   @Selector()
   static getCartQuantity(state: CartStateModel) {
     return state.cart.length;
-  }
-  
+  }  
+
   @Selector()
-  static getCart(state: CartStateModel) {
+  static getSubtotal(state: CartStateModel): number {
+    // Calculate the subtotal by summing up the prices of items in the cart
+    return state.cart.reduce((acc, book) => acc + book.price, 0);
+  }
+
+  @Selector()
+  static getCart(state: CartStateModel): Book[] {
     return state.cart;
   }
 

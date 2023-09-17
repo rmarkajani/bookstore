@@ -12,6 +12,7 @@ import { CartState } from 'src/app/core/stores/cart/cart.state';
 })
 export class CartComponent {
   @Select(CartState.getCart) cart$: Observable<Book[]>;
+  @Select(CartState.getSubtotal) subTotal$: Observable<number>;
 
   private store = inject(Store);
   
