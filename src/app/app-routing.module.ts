@@ -27,10 +27,16 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'login',
+    loadChildren: () =>
+      import('./main/pages/login/login.module').then((m) => m.LoginModule),
+  },
+  {
     path: 'cart',
     loadChildren: () =>
       import('./main/pages/cart/cart.module').then((m) => m.CartModule),
   },
+  
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' },
 ];
