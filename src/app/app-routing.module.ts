@@ -47,6 +47,11 @@ const routes: Routes = [
       import('./main/pages/checkout/checkout.module').then((m) => m.CheckoutModule),
   },
   {
+    path: 'confirmation',
+    loadChildren: () =>
+      import('./main/pages/confirmation/confirmation.module').then((m) => m.ConfirmationModule),
+  },
+  {
     path: 'register',
     loadChildren: () =>
       import('./main/pages/register/register.module').then((m) => m.RegisterModule),
