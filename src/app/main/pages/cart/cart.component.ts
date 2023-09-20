@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Book } from 'src/app/core/interfaces/book.interface';
 import { RemoveFromCart } from 'src/app/core/stores/cart/cart.actions';
 import { CartState } from 'src/app/core/stores/cart/cart.state';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -19,4 +20,10 @@ export class CartComponent {
   removeFromCart(book: Book) {
     this.store.dispatch(new RemoveFromCart(book));
   }
+
+  constructor(private router: Router) { }
+
+goToCheckout() {
+  this.router.navigate(['/checkout']);
+}
 }

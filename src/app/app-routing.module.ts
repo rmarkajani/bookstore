@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CheckoutComponent } from './main/pages/checkout/checkout.component';
+import { ConfirmationComponent } from './main/pages/confirmation/confirmation.component';
 
 const routes: Routes = [
   {
@@ -42,14 +44,10 @@ const routes: Routes = [
       import('./main/pages/profile/profile.module').then((m) => m.ProfileModule),
   },
   {
-    path: 'checkout',
-    loadChildren: () =>
-      import('./main/pages/checkout/checkout.module').then((m) => m.CheckoutModule),
+    path: 'checkout', component: CheckoutComponent
   },
   {
-    path: 'confirmation',
-    loadChildren: () =>
-      import('./main/pages/confirmation/confirmation.module').then((m) => m.ConfirmationModule),
+    path: 'confirmation', component: ConfirmationComponent
   },
   {
     path: 'register',
