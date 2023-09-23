@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { User } from '../../interfaces/user.interface';
 import { Observable } from 'rxjs';
@@ -11,16 +11,28 @@ export class UsersService {
   constructor() {}
 
   URL = 'http://localhost:3000/users';
-  getUsers() {
-    return this.http.get(this.URL);
+
+  // Create an instance of HttpHeaders and set the header values
+  private httpOptions = {
+    headers: new HttpHeaders({
+      Authorization:
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpY2t5cmlja0Bhd2Vzb21lLmNvbSIsIl9pZCI6IjY1MGU3ZTUzOGM2M2EwYWFhN2I3ZTJiZiIsImlhdCI6MTY5NTQ1MDUyMCwiZXhwIjoxNjk1NDU0MTIwfQ.YZORACLZFGnRezIHqt4DNIXH7a0rUD7IipJ2MK-6yGU',
+      Accept: 'application/json',
+    }),
+  };
+  getUsers(): Observable<User[]> {
+    return this.http.get(`${this.URL}/getAll`, this.httpOptions) as Observable<
+      User[]
+    >;
   }
   getUser(id: string): Observable<User> {
-    return this.http.get(`${this.URL}/${id}`) as Observable<User>;
+    return this.http.get(
+      `${this.URL}/getUser/${id}`,
+      this.httpOptions
+    ) as Observable<User>;
   }
 
   createUser(user: User) {
-    console.log(user);
-    
-    return this.http.post(this.URL, user, ).subscribe();
+    return this.http.post(this.URL, user, this.httpOptions).subscribe();
   }
 }
