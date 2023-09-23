@@ -8,6 +8,8 @@ import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
 import { stores } from './core/stores';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { UsersService } from './core/services/users/users.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,8 +21,9 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
       developmentMode: !environment.production,
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [UsersService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
