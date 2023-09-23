@@ -21,13 +21,13 @@ export class UsersService {
     }),
   };
   getUsers(): Observable<User[]> {
-    return this.http.get(`${this.URL}/getAll`, this.httpOptions) as Observable<
+    return this.http.get(this.URL, this.httpOptions) as Observable<
       User[]
     >;
   }
   getUser(id: string): Observable<User> {
     return this.http.get(
-      `${this.URL}/getUser/${id}`,
+      `${this.URL}/${id}`,
       this.httpOptions
     ) as Observable<User>;
   }
