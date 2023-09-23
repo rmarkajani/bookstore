@@ -5,6 +5,11 @@ import { ConfirmationComponent } from './main/pages/confirmation/confirmation.co
 
 const routes: Routes = [
   {
+    path: 'profile',
+    loadChildren: () =>
+      import('./main/pages/profile/profile.module').then((m) => m.ProfileModule),
+  },
+  {
     path: 'home',
     loadChildren: () =>
       import('./main/pages/home/home.module').then((m) => m.HomeModule),
