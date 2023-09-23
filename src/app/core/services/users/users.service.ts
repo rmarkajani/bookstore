@@ -12,4 +12,7 @@ export class UsersService {
   getUsers() {
     return this.http.get(this.URL);
   }
+  getUser(id: string) {
+    return this.http.get(`${this.URL}/${id}`);
+  }
 }

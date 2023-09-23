@@ -1,62 +1,16 @@
-<style>
-  @import url(https://www.improvutopia.com/wp-content/uploads/2016/02/empty.png.jpeg);
-  * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-  }
-  
-  body {
-      background-color: #3817bd;
-      font-family: Montserrat, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      min-height: 100vh;
-      margin: 0;
-  }
-  
-  h3 {
-    font-size: 16px;
-      margin: 10px 0;
-  }
-  
-  h6 {
-    font-size: 16px;
-      margin: 5px 0;
-      text-transform: uppercase;
-  }
-  
-  p {
-      font-size: 16px;
-      line-height: 21px;
-  }
-  
-  .card-container {
-      background-color: #231E39;
-      border-radius: 5px;
-      box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
-      color: #B3B8CD;
-      padding-top: 30px;
-      padding-bottom: 30px;
-      padding-left: 30px;
-      padding-right: 30px;
-      margin-left: 700px;
-      margin-top: 200px;
-      position: center;
-      width: 350px;
-      max-width: 100%;
-      text-align: center;
-  }
-  </style>
-  <div class="card-container">
-    <span class="pro">User Name</span>
-    <img class="round" src="https://www.improvutopia.com/wp-content/uploads/2016/02/empty.png.jpeg);
-    " alt="user" />
-    <h3>Ricky Park, New York</h3>
-    <p>Book enjoyer and <br/> page reader</p>
-  </div>
-  <div class="center-box">
-    <!-- Your other content goes here -->
-  </div>
+<div class="card-container" *ngIf="user">
+  <span class="pro">{{ user.name }}</span>
+  <img
+    class="round"
+    src="https://www.improvutopia.com/wp-content/uploads/2016/02/empty.png.jpeg;
+    "
+    alt="user"
+  />
+  <h3>{{user.title}}</h3>
+  <p>
+    {{user.description}}
+  </p>
+</div>
+<div class="center-box">
+  <!-- Your other content goes here -->
+</div>
