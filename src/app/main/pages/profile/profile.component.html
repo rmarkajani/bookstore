@@ -6,12 +6,16 @@
     "
     alt="user"
   />
-  <h3>{{user.title}}</h3>
+  <h3>{{ user.title }}</h3>
   <h5>{{ user.birthday }}</h5>
   <p>
-    {{user.description}}
+    {{ user.description }}
   </p>
 </div>
 <div class="center-box">
   <!-- Your other content goes here -->
 </div>
+
+<button class="bg-blue-400 rounded !px-3 !py-2" (click)="getUsers()">
+  Get Users
+</button>

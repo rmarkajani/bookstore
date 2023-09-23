@@ -13,13 +13,16 @@ export class ProfileComponent {
   user: User;
 
   ngOnInit() {
-    this.loadUser();
+    this.getUser();
   }
 
-  async loadUser() {
-    /** TODO: Get current user */
-    this.user = (await lastValueFrom(
+  async getUser() {
+    this.user = await lastValueFrom(
       this.userService.getUser('650e41f06c2954a9a99893e5')
-    )) as User;
+    );
+  }
+  async getUsers() {
+    const users = await lastValueFrom(this.userService.getUsers());
+    console.log(users);
   }
 }
