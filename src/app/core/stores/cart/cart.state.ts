@@ -29,7 +29,7 @@ export class CartState {
     // Calculate the subtotal by summing up the prices of items in the cart
     const subTotal = state.cart.reduce((acc, book) => acc + book.price, 0);
     const subTax = +(subTotal * 0.08).toFixed(2)
-    const total = subTax + subTotal
+    const total = +(subTax * 0.08).toFixed(2) + +(subTotal * 0.08).toFixed(2)
     return {subTotal: subTotal, subTax: subTax, total: total};
   }
 
