@@ -55,6 +55,12 @@ export class CartState {
     { payload }: RemoveFromCart
   ) {
     const state = getState();
+    const updatedCart = state.cart.filter((item) => item.price !== payload.price);
+
+    setState({
+      ...state,
+      cart: updatedCart
+    });
     // setState({ cart: [...state.cart, payload] });
 
     // http put update db
