@@ -8,5 +8,5 @@ import { Router } from '@angular/router';
   styleUrls: ['./confirmation.component.scss']
 })
 export class ConfirmationComponent {
-
+  
 }
