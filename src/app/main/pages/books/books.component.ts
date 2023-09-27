@@ -13,9 +13,7 @@ import { Observable, firstValueFrom, lastValueFrom } from 'rxjs';
   styleUrls: ['./books.component.scss'],
 })
 export class BooksComponent {
-  @Select((state: any) => state.cart.books) books$: Observable<Book[]>;
-
-  // @Select(CartState.getBooks) books$: Observable<Book[]>
+  @Select(CartState.getBooks) books$: Observable<Book[]>;
   showBooks: boolean = false;
   booklist: Book[] = [];
   originalList: Book[] = [];
@@ -44,8 +42,8 @@ export class BooksComponent {
   async filterByCategory(category: string) {
     this.showBooks = false;
     this.selectedCategory = category;
-    console.log(category);
-    const books = (this.originalList = await firstValueFrom(this.books$));
+
+    const books = await firstValueFrom(this.books$);
 
     if (category === 'All Books') {
       this.originalList = books;
