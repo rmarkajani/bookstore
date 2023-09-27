@@ -5,7 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import { AddToCart } from 'src/app/core/stores/cart/cart.actions';
 import { Book } from 'src/app/core/interfaces/book.interface';
 import { CartState, CartStateModel } from 'src/app/core/stores/cart/cart.state';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom, lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-books',
@@ -13,13 +13,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./books.component.scss'],
 })
 export class BooksComponent {
-  @Select((state: any) => state.cart.books) books$: Observable<Book[]>
-  
-  // @Select(CartState.getBooks) books$: Observable<Book[]>
+  @Select(CartState.getBooks) books$: Observable<Book[]>;
   showBooks: boolean = false;
   booklist: Book[] = [];
   originalList: Book[] = [];
-  books: string[] = [];
+  categories: string[] = [];
   selectedCategory: string = 'All Books';
 
   private http = inject(HttpClient);
@@ -28,21 +26,29 @@ export class BooksComponent {
 
   ngOnInit(): void {
     // this.loadCSV();
+    this.books$.subscribe((books: Book[]) => {
+      this.originalList = books;
+      this.categories = [
+        'All Books',
+        ...Array.from(new Set(books.map((book) => book.genre))),
+      ];
+    });
   }
 
   addToCart(book: Book) {
     this.store.dispatch(new AddToCart(book));
   }
 
-  filterByCategory(category: string) {
+  async filterByCategory(category: string) {
     this.showBooks = false;
     this.selectedCategory = category;
+
+    const books = await firstValueFrom(this.books$);
+
     if (category === 'All Books') {
-      this.originalList = this.booklist;
+      this.originalList = books;
     } else {
-      this.originalList = this.booklist.filter(
-        (book: Book) => book.genre === category
-      );
+      this.originalList = books.filter((book: Book) => book.genre === category);
     }
   }
 
@@ -73,12 +79,7 @@ export class BooksComponent {
   //         this.booklist.push(obj);
   //       }
 
-
   //       this.originalList = this.booklist;
-  //       this.books = [
-  //         'All Books',
-  //         ...Array.from(new Set(this.booklist.map((book) => book.genre))),
-  //       ];
   //     },
   //     (error) => {
   //       console.log(error);
@@ -86,33 +87,32 @@ export class BooksComponent {
   //   );
   // }
 
+  // csvLineToArray(text: string): string[] {
+  //   let ret: string[] = [];
+  //   let inQuote: boolean = false;
+  //   let value: string = '';
 
-  csvLineToArray(text: string): string[] {
-    let ret: string[] = [];
-    let inQuote: boolean = false;
-    let value: string = '';
-
-    for (let ch of text) {
-      if (inQuote) {
-        if (ch === '"') {
-          inQuote = false;
-        } else {
-          value += ch;
-        }
-      } else {
-        if (ch === '"') {
-          inQuote = true;
-        } else if (ch === ',') {
-          ret.push(value);
-          value = '';
-        } else {
-          value += ch;
-        }
-      }
-    }
-    ret.push(value);
-    return ret;
-  }
+  //   for (let ch of text) {
+  //     if (inQuote) {
+  //       if (ch === '"') {
+  //         inQuote = false;
+  //       } else {
+  //         value += ch;
+  //       }
+  //     } else {
+  //       if (ch === '"') {
+  //         inQuote = true;
+  //       } else if (ch === ',') {
+  //         ret.push(value);
+  //         value = '';
+  //       } else {
+  //         value += ch;
+  //       }
+  //     }
+  //   }
+  //   ret.push(value);
+  //   return ret;
+  // }
 
   @HostListener('document:keydown.escape', ['$event'])
   onKeydownHandler(event: KeyboardEvent) {
