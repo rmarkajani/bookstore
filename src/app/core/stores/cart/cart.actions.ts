@@ -8,3 +8,7 @@ export class RemoveFromCart {
   static readonly type = '[Cart] Remove From Cart';
   constructor(public payload: Book) {}
 }
+
+export class LoadBooks {
+  static readonly type = '[Cart] Load Books';
+}

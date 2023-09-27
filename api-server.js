@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const fs = require( 'fs' )
+const csv = require ('csv-parser')
 
 // Create an Express application
 const app = express();
@@ -37,7 +38,8 @@ app.post('/api/books', (req, res) => {
 app.get('/api/books', (req, res) => {
   const results = [];
 
-  fs.createReadStream('src/assets/booklist.json')
+  fs.createReadStream('src/assets/booklist.csv_bkup')
+  .pipe(csv())
   .on('data', (data) => {
     console.log(data)
     results.push(data)
