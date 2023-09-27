@@ -1,24 +1,3 @@
-<div class="card-container" *ngIf="user">
-  <span class="pro">{{ user.name }}</span>
-  <img
-    class="round"
-    src="https://www.improvutopia.com/wp-content/uploads/2016/02/empty.png.jpeg;
-    "
-    alt="user"
-  />
-  <h3>{{ user.title }}</h3>
-  <h5>{{ user.birthday }}</h5>
-  <p>
-    {{ user.description }}
-  </p>
-</div>
-<div class="center-box">
-  <!-- Your other content goes here -->
-</div>
-
-<button class="bg-blue-400 rounded !px-3 !py-2" (click)="getUsers()">
-  Get Users
-</button>
 
 <style>
   @import url(https://www.improvutopia.com/wp-content/uploads/2016/02/empty.png.jpeg);
@@ -66,7 +45,11 @@ p {
     max-width: 100%;
     text-align: center;}
     </style>
-    <div class="card-container"><span class="pro">John Doe</span><img class="round" src="https://www.improvutopia.com/wp-content/uploads/2016/02/empty.png.jpeg);" alt="user" /><h3>Colorado Springs, Colorado</h3>
+    <div class="card-container">
+      <span class="pro">John Doe</span>
+      <img class="round" src="https://www.improvutopia.com/wp-content/uploads/2016/02/empty.png.jpeg);" alt="user" />
+      <h3>Colorado Springs, Colorado
+      </h3>
     </div>
     <div class="center-box"><!-- Your other content goes here -->
     </div>

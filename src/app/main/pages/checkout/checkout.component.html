@@ -150,32 +150,56 @@ p{
           />
         </div>
         <div class="rightside">
-          <form action="">
-            <h1>CheckOut</h1>
-            <h2>Payment Information</h2>
-            <p>Cardholder Name</p>
-            <input type="text" class="inputbox" name="name" required />
-            <p>Card Number</p>
-            <input type="number" class="inputbox" name="card_number" id="card_number" required />
-
-            <p>Card Type</p>
-            <select class="inputbox" name="card_type" id="card_type" required >
-              <option value="">--Select a Card Type--</option>
-              <option value="Visa">Visa</option>
-              <option value="RuPay">RuPay</option>
-              <option value="MasterCard">MasterCard</option>
-            </select>
-<div class="expcvv">
-
-            <p class="expcvv_text">Expiry</p>
-            <input type="date" class="inputbox" name="exp_date" id="exp_date" required />
-
-            <p class="expcvv_text2">CVV</p>
-            <input type="password" class="inputbox" name="cvv" id="cvv" maxlength="3" required />
-        </div>
-            <p></p>
-            <button (click)="goToConfirmation()" class="button">Confirm</button>
-          </form>
+            <form action="">
+                <h1>CheckOut</h1>
+                <h2>Payment Information</h2>
+              
+                <!-- Payment Information Fields -->
+                <p>Cardholder Name</p>
+                <input type="text" class="inputbox" name="name" required />
+              
+                <p>Card Number</p>
+                <input type="number" class="inputbox" name="card_number" id="card_number" required />
+              
+                <p>Card Type</p>
+                <select class="inputbox" name="card_type" id="card_type" required>
+                  <option value="">--Select a Card Type--</option>
+                  <option value="Visa">Visa</option>
+                  <option value="RuPay">RuPay</option>
+                  <option value="MasterCard">MasterCard</option>
+                </select>
+              
+                <div class="expcvv">
+                  <p class="expcvv_text">Expiry</p>
+                  <input type="date" class="inputbox" name="exp_date" id="exp_date" required />
+              
+                  <p class="expcvv_text2">CVV</p>
+                  <input type="password" class="inputbox" name="cvv" id="cvv" maxlength="3" required />
+                </div>
+              
+                <!-- Shipping Information Fields -->
+                <h2>Shipping Information</h2>
+              
+                <p>Address Line 1</p>
+                <input type="text" class="inputbox" name="address_line1" required />
+              
+                <p>Address Line 2</p>
+                <input type="text" class="inputbox" name="address_line2" />
+              
+                <p>City</p>
+                <input type="text" class="inputbox" name="city" required />
+              
+                <p>State</p>
+                <input type="text" class="inputbox" name="state" required />
+              
+                <p>Zip Code</p>
+                <input type="text" class="inputbox" name="zip_code" required />
+                <!-- End of Shipping Information Fields -->
+              
+                <p></p>
+                <button (click)="goToConfirmation()" class="button">Confirm</button>
+              </form>
+              
         </div>
       </div>
     </div>
