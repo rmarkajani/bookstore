@@ -42,7 +42,7 @@ export class BooksComponent {
   }
 
   loadCSV(): void {
-    this.http.get('assets/booklist.csv', { responseType: 'text' }).subscribe(
+    this.http.get('assets/booklist.json', { responseType: 'text' }).subscribe(
       (data) => {
         let lines = data.split('\n');
         let headers = lines[0].replace(/\r/g, '').split(',');

@@ -1,5 +1,5 @@
 // server.js (Node.js and Express example)
-
+const cors = require('cors'); // Import the cors package
 const express = require('express');
 const fs = require('fs');
 const app = express();
@@ -25,7 +25,8 @@ app.put('http://localhost:3000/api/books/:bookId', (req, res) => {
   res.json({ message: 'Book quantity updated successfully' });
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
 
