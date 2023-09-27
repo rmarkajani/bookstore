@@ -1,16 +1,25 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { AddToCart, RemoveFromCart } from './cart.actions';
+import {
+  AddToCart,
+  DecrementBookQuantity,
+  LoadBooks,
+  RemoveFromCart
+} from './cart.actions';
 import { Book } from '../../interfaces/book.interface';
+import { BOOKS } from './books';
+import { v4 as UUIDv4 } from 'uuid';
 
 export class CartStateModel {
   public cart: Book[] = [];
+  public books: Book[] = [];
   public subTotal: number;
 }
 
 const defaults = {
   cart: [],
-  subTotal: 0
+  books: [],
+  subTotal: 0,
 };
 
 @State<CartStateModel>({
@@ -20,17 +29,25 @@ const defaults = {
 @Injectable()
 export class CartState {
   @Selector()
+  static getBooks(state: CartStateModel) {
+    return state.books;
+  }
+  @Selector()
   static getCartQuantity(state: CartStateModel) {
     return state.cart.length;
-  }  
+  }
 
   @Selector()
-  static getSummary(state: CartStateModel): { subTotal: number; subTax: number; total: number; } {
+  static getSummary(state: CartStateModel): {
+    subTotal: number;
+    subTax: number;
+    total: number;
+  } {
     // Calculate the subtotal by summing up the prices of items in the cart
     const subTotal = state.cart.reduce((acc, book) => acc + book.price, 0);
-    const subTax = +(subTotal * 0.08).toFixed(2)
-    const total = subTax + subTotal
-    return {subTotal: subTotal, subTax: subTax, total: total};
+    const subTax = +(subTotal * 0.08).toFixed(2);
+    const total = +subTax.toFixed(2) + +subTotal.toFixed(2);
+    return { subTotal: subTotal, subTax: subTax, total: total };
   }
 
   @Selector()
@@ -38,15 +55,24 @@ export class CartState {
     return state.cart;
   }
 
+  books: Book[] = BOOKS;
+  @Action(LoadBooks)
+  loadBooks({ patchState }: StateContext<CartStateModel>) {
+    patchState({ books: this.books });
+
+    // http put update db
+  }
+
   @Action(AddToCart)
   add(
-    { getState, setState }: StateContext<CartStateModel>,
+    { getState, patchState }: StateContext<CartStateModel>,
     { payload }: AddToCart
   ) {
     const state = getState();
-    setState({ cart: [...state.cart, payload], subTotal: state.subTotal + payload.price });
-
-    // http put update db
+    patchState({
+      cart: [...state.cart, payload],
+      subTotal: state.subTotal + payload.price,
+    });
   }
 
   @Action(RemoveFromCart)
@@ -55,8 +81,34 @@ export class CartState {
     { payload }: RemoveFromCart
   ) {
     const state = getState();
-    // setState({ cart: [...state.cart, payload] });
+    const updatedCart = state.cart.filter(
+      (item) => item.price !== payload.price
+    );
 
-    // http put update db
+    setState({
+      ...state,
+      cart: updatedCart,
+    });
+  }
+
+  @Action(DecrementBookQuantity)
+  decrementBookQuantity(
+    { getState, setState }: StateContext<CartStateModel>,
+    { bookId }: DecrementBookQuantity
+  ) {    
+    const state = getState();
+    const updatedBooks = state.books.map((book: Book) => {
+      const b = {...book};
+      if (book.id === bookId) {
+        b.quantity--;
+        return b;
+      }
+      return book;
+    });
+    setState({
+      ...state,
+      cart: [],
+      books: updatedBooks
+    });
   }
 }

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ComponentsModule } from './main/components/components.module';
@@ -10,6 +9,8 @@ import { stores } from './core/stores';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { UsersService } from './core/services/users/users.service';
 import { HttpClientModule } from '@angular/common/http';
+import { BookService } from './core/services/books/book.service'; // Import the BookService
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     NgxsReduxDevtoolsPluginModule.forRoot(),
     HttpClientModule,
   ],
-  providers: [UsersService],
+  providers: [UsersService, BookService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

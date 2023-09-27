@@ -5,8 +5,6 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-confirmation',
   templateUrl: './confirmation.component.html',
-  styleUrls: ['./confirmation.component.scss']
+  styleUrls: ['./confirmation.component.scss'],
 })
-export class ConfirmationComponent {
-
-}
+export class ConfirmationComponent {}

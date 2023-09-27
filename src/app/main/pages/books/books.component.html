@@ -137,12 +137,12 @@
               >
                 Genre
               </th>
-              <!-- <th
+              <th
                 scope="col"
                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
               >
                 Quantity
-              </th> -->
+              </th>
               <th
                 scope="col"
                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
@@ -155,7 +155,7 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
-            <tr *ngFor="let book of originalList">
+            <tr *ngFor="let book of books$ | async">
               <td
                 class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
               >
@@ -170,9 +170,9 @@
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 {{ book.genre }}
               </td>
-              <!-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+              <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 {{ book.quantity }}
-              </td> -->
+              </td>
               <td
                 class="whitespace-nowrap px-3 py-4 text-sm text-indigo-600 hover:text-indigo-900 cursor-pointer"
                 (click)="addToCart(book)"
@@ -182,7 +182,7 @@
               <!-- <td
                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0"
               >
-                <a href="#" class="text-indigo-600 hover:text-indigo-900"
+                <a class="text-indigo-600 hover:text-indigo-900"
                   >Open<span class="sr-only">, Lindsay Walton</span></a
                 >
               </td> -->
