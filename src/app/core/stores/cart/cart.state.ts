@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import {
   AddToCart,
+  DecrementBookQuantity,
   LoadBooks,
-  RemoveFromCart,
-  UpdateBookQuantity,
+  RemoveFromCart
 } from './cart.actions';
 import { Book } from '../../interfaces/book.interface';
 import { BOOKS } from './books';
@@ -58,7 +58,6 @@ export class CartState {
   books: Book[] = BOOKS;
   @Action(LoadBooks)
   loadBooks({ patchState }: StateContext<CartStateModel>) {
-
     patchState({ books: this.books });
 
     // http put update db
@@ -92,21 +91,22 @@ export class CartState {
     });
   }
 
-  @Action(UpdateBookQuantity)
-  updateBookQuantity(
+  @Action(DecrementBookQuantity)
+  decrementBookQuantity(
     { getState, setState }: StateContext<CartStateModel>,
-    { bookId }: UpdateBookQuantity
+    { bookId }: DecrementBookQuantity
   ) {
     const state = getState();
     const updatedBooks = state.books.map((book: Book) => {
       if (book.id === bookId) {
+        book.quantity--;
+        return book;
       }
       return book;
     });
-
-    // setState({
-    //   ...state,
-    //   books: updatedBooks
-    // });
+    setState({
+      ...state,
+      books: updatedBooks
+    });
   }
 }
