@@ -12,3 +12,7 @@ export class RemoveFromCart {
 export class LoadBooks {
   static readonly type = '[Cart] Load Books';
 }
+export class UpdateBookQuantity {
+  static readonly type = '[Cart] Update Book Quantity';
+  constructor(public bookId: string) {}
+}
