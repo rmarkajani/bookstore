@@ -51,10 +51,9 @@
           />
         </div>
         <p></p>
-        <button (click)="decrementBookQuantity('aads')" class="button">
-          Confirm
-        </button>
-        <!-- <button (click)="goToConfirmation(bookId, newQuantity)" class="button">Confirm</button> -->
+        <div class="mt-6" *ngIf="cart$ | async as cart">
+          <button  class="button" (click)="decrementBookQuantities(cart)">Confirm</button>
+        </div>
       </form>
     </div>
   </div>

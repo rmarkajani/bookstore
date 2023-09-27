@@ -7,7 +7,9 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () =>
-      import('./main/pages/profile/profile.module').then((m) => m.ProfileModule),
+      import('./main/pages/profile/profile.module').then(
+        (m) => m.ProfileModule
+      ),
   },
   {
     path: 'home',
@@ -46,18 +48,30 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () =>
-      import('./main/pages/profile/profile.module').then((m) => m.ProfileModule),
+      import('./main/pages/profile/profile.module').then(
+        (m) => m.ProfileModule
+      ),
   },
   {
-    path: 'checkout', component: CheckoutComponent
+    path: 'checkout',
+    loadChildren: () =>
+      import('./main/pages/checkout/checkout.module').then(
+        (m) => m.CheckoutModule
+      ),
   },
   {
-    path: 'confirmation', component: ConfirmationComponent
+    path: 'confirmation',
+    loadChildren: () =>
+      import('./main/pages/confirmation/confirmation.module').then(
+        (m) => m.ConfirmationModule
+      ),
   },
   {
     path: 'register',
     loadChildren: () =>
-      import('./main/pages/register/register.module').then((m) => m.RegisterModule),
+      import('./main/pages/register/register.module').then(
+        (m) => m.RegisterModule
+      ),
   },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' },

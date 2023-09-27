@@ -30,9 +30,9 @@ export class CartComponent {
 
   constructor(private router: Router) {}
 
-  // goToCheckout() {
-  //   this.router.navigate(['/checkout']);
-  // }
+  goToCheckout() {
+    this.router.navigate(['/checkout']);
+  }
 
   decrementBookQuantities(books: Book[]) {
     books.map((book: Book) => {
