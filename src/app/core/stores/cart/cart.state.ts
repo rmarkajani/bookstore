@@ -95,17 +95,19 @@ export class CartState {
   decrementBookQuantity(
     { getState, setState }: StateContext<CartStateModel>,
     { bookId }: DecrementBookQuantity
-  ) {
+  ) {    
     const state = getState();
     const updatedBooks = state.books.map((book: Book) => {
+      const b = {...book};
       if (book.id === bookId) {
-        book.quantity--;
-        return book;
+        b.quantity--;
+        return b;
       }
       return book;
     });
     setState({
       ...state,
+      cart: [],
       books: updatedBooks
     });
   }
