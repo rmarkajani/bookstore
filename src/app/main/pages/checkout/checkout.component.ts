@@ -4,8 +4,8 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { Book } from 'src/app/core/interfaces/book.interface';
 import { BookService } from 'src/app/core/services/books/book.service';// Import BookService
-import { DecrementBookQuantity } from 'src/app/core/stores/cart/cart.actions';
-import { CartState } from 'src/app/core/stores/cart/cart.state';
+import { DecrementBookQuantity } from 'src/app/core/states/cart/cart.actions';
+import { CartState } from 'src/app/core/states/cart/cart.state';
 
 @Component({
   selector: 'app-checkout',

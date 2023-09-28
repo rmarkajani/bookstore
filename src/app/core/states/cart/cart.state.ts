@@ -3,8 +3,9 @@ import { State, Action, StateContext, Selector } from '@ngxs/store';
 import {
   AddToCart,
   DecrementBookQuantity,
+  FilterByCategory,
   LoadBooks,
-  RemoveFromCart
+  RemoveFromCart,
 } from './cart.actions';
 import { Book } from '../../interfaces/book.interface';
 import { BOOKS } from './books';
@@ -13,12 +14,17 @@ import { v4 as UUIDv4 } from 'uuid';
 export class CartStateModel {
   public cart: Book[] = [];
   public books: Book[] = [];
+  public categories: string[] = [];
+  public originalBooks: Book[] = [];
+
   public subTotal: number;
 }
 
 const defaults = {
   cart: [],
   books: [],
+  categories: [],
+  originalBooks: [],
   subTotal: 0,
 };
 
@@ -31,6 +37,10 @@ export class CartState {
   @Selector()
   static getBooks(state: CartStateModel) {
     return state.books;
+  }
+  @Selector()
+  static getCategories(state: CartStateModel) {
+    return state.categories;
   }
   @Selector()
   static getCartQuantity(state: CartStateModel) {
@@ -58,9 +68,14 @@ export class CartState {
   books: Book[] = BOOKS;
   @Action(LoadBooks)
   loadBooks({ patchState }: StateContext<CartStateModel>) {
-    patchState({ books: this.books });
-
-    // http put update db
+    patchState({
+      books: this.books,
+      originalBooks: this.books,
+      categories: [
+        'All Books',
+        ...Array.from(new Set(this.books.map((book) => book.genre))),
+      ],
+    });
   }
 
   @Action(AddToCart)
@@ -95,10 +110,10 @@ export class CartState {
   decrementBookQuantity(
     { getState, setState }: StateContext<CartStateModel>,
     { bookId }: DecrementBookQuantity
-  ) {    
+  ) {
     const state = getState();
     const updatedBooks = state.books.map((book: Book) => {
-      const b = {...book};
+      const b = { ...book };
       if (book.id === bookId) {
         b.quantity--;
         return b;
@@ -108,7 +123,29 @@ export class CartState {
     setState({
       ...state,
       cart: [],
-      books: updatedBooks
+      books: updatedBooks,
+    });
+  }
+  @Action(FilterByCategory)
+  filterByCategory(
+    { getState, setState }: StateContext<CartStateModel>,
+    { category }: FilterByCategory
+  ) {
+    const state = getState();
+    let filteredBooks: Book[] = [];
+
+    if (category === 'All Books') {
+      filteredBooks = state.originalBooks;
+    } else {
+      filteredBooks = state.originalBooks.filter(
+        (book: Book) => book.genre === category
+      );
+    }
+
+    setState({
+      ...state,
+      cart: [],
+      books: filteredBooks,
     });
   }
 }

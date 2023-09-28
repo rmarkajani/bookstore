@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { ComponentsModule } from './main/components/components.module';
 import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
-import { stores } from './core/stores';
+import { stores } from './core/states';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { UsersService } from './core/services/users/users.service';
 import { HttpClientModule } from '@angular/common/http';

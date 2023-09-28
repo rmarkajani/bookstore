@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { LoadBooks } from './core/stores/cart/cart.actions';
+import { LoadBooks } from './core/states/cart/cart.actions';
 import { Store } from '@ngxs/store';
 
 @Component({
@@ -8,9 +8,9 @@ import { Store } from '@ngxs/store';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  store = inject(Store)
+  store = inject(Store);
 
   constructor() {
-    this.store.dispatch(LoadBooks)
+    this.store.dispatch(LoadBooks);
   }
 }

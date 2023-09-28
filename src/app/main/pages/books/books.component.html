@@ -20,7 +20,7 @@
             aria-expanded="false"
             value="{{ selectedCategory }}"
             readonly
-            (click)="showBooks = !showBooks"
+            (click)="showCategoriesPopup = !showCategoriesPopup"
           />
           <button
             type="button"
@@ -43,7 +43,7 @@
           </button>
 
           <ul
-            *ngIf="showBooks"
+            *ngIf="showCategoriesPopup"
             class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
             id="options"
             role="listbox"
@@ -54,7 +54,7 @@
               Active: "text-white bg-indigo-600", Not Active: "text-gray-900"
             -->
             <li
-              *ngFor="let category of categories"
+              *ngFor="let category of categories$ | async"
               class="relative cursor-pointer select-none py-2 pl-3 pr-9 text-gray-900 hover:bg-slate-100"
               id="option-0"
               role="option"
@@ -64,7 +64,9 @@
               <!-- Selected: "font-semibold" -->
               <span
                 class="block truncate"
-                [ngClass]="{ 'font-semibold': selectedCategory === category }"
+                [ngClass]="{
+                  'font-semibold': selectedCategory === category
+                }"
               >
                 {{ category }}
               </span>
@@ -155,7 +157,7 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
-            <tr *ngFor="let book of originalList">
+            <tr *ngFor="let book of books$ | async">
               <td
                 class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
               >
@@ -196,15 +198,6 @@
   </div>
 </div>
 
-
-
 <!-- <app-books-modal *ngIf="false"></app-books-modal> -->
 
 <!-- ng g c main/pages/books/books-modal -->
-
-
-
-
-
-
-

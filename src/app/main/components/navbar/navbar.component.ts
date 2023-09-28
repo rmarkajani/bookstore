@@ -1,7 +1,7 @@
 import { Component, Host, HostListener } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { CartState } from 'src/app/core/stores/cart/cart.state';
+import { CartState } from 'src/app/core/states/cart/cart.state';
 
 @Component({
   selector: 'app-navbar',

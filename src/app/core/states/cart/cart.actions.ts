@@ -16,3 +16,7 @@ export class DecrementBookQuantity {
   static readonly type = '[Cart] Deccrement Book Quantity';
   constructor(public bookId: string) {}
 }
+export class FilterByCategory {
+  static readonly type = '[Cart] Filter By Category';
+  constructor(public category: string) {}
+}

@@ -5,8 +5,8 @@ import { Book } from 'src/app/core/interfaces/book.interface';
 import {
   DecrementBookQuantity,
   RemoveFromCart,
-} from 'src/app/core/stores/cart/cart.actions';
-import { CartState } from 'src/app/core/stores/cart/cart.state';
+} from 'src/app/core/states/cart/cart.actions';
+import { CartState } from 'src/app/core/states/cart/cart.state';
 import { Router } from '@angular/router';
 
 @Component({
